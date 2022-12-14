@@ -151,8 +151,8 @@ def scramble():
     # l must be defined later
     m = randint(0, ring_len - 1)
 
-    # set indice l
-    l = (ring_len + i + (m - k) - 1 ) % ring_len
+    # set indices j and l
+    l = (-m) % ring_len
 
     # print
     l0.config(text=ring[i])
