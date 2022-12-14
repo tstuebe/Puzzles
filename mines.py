@@ -54,10 +54,16 @@ spot[x][y] = tk.Label(window, bg='white', width=5, height=1, text='o')
 spot[x][y].grid(row = x + 1, column = y + 1)
 
 def reset():
+    global x
+    global y
     for i in range(0,7):
         for j in range(0,7):
             spot[i][j] = tk.Label(window, bg='white', width=5, height=1, text='')
-            spot[i][j].grid(row = i, column = j)
+            spot[i][j].grid(row = i + 1, column = j + 1)
+    x = 6
+    y = 3
+    spot[x][y].config(text = 'o')
+    
 
 def up():
     global x
@@ -105,6 +111,7 @@ b1 = tk.Button(window, text='<', height=1, command=left)
 b2 = tk.Button(window, text='v', height=1, command=down)
 b3 = tk.Button(window, text='^', height=1, command=up)
 b4 = tk.Button(window, text='>', height=1, command=right)
+reset = tk.Button(window, text='r', height=1, command=reset)
 
 # player.grid(row = x, column = y)
 
@@ -112,7 +119,7 @@ b1.grid(column = 4, row = 8)
 b2.grid(column = 5, row = 8)
 b3.grid(column = 6, row = 8)
 b4.grid(column = 7, row = 8)
-
+reset.grid(column = 1, row = 8)
 
 
 window.mainloop()
