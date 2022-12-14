@@ -8,7 +8,7 @@ from random import randint
 # Format Window
 window = tk.Tk()
 window.title('Tube Puzzle')
-window.geometry('600x250')
+window.geometry('600x300')
 
 # Define Rings
 ring = [0, 1, 2, 3, 4, 5, 6]
@@ -29,6 +29,16 @@ window.columnconfigure(3, weight=1)
 window.columnconfigure(4, weight=1)
 window.columnconfigure(5, weight=1)
 window.columnconfigure(6, weight=1)
+
+# Format Rows
+window.rowconfigure(0, weight=1)
+window.rowconfigure(1, weight=1)
+window.rowconfigure(2, weight=1)
+window.rowconfigure(3, weight=1)
+window.rowconfigure(4, weight=1)
+window.rowconfigure(5, weight=1)
+window.rowconfigure(6, weight=1)
+window.rowconfigure(7, weight=1)
 
 # Prepare Output Interface
 l0 = tk.Label(window, bg='white', width=10, text=ring[i])
@@ -146,13 +156,15 @@ def scramble():
     global l
     global m
     i = randint(0, ring_len - 1)
-    j = randint(0, ring_len - 1)
+    j = 0
     k = randint(0, ring_len - 1)
-    # l must be defined later
+    l = 0
     m = randint(0, ring_len - 1)
 
     # set indices j and l
-    l = (-m) % ring_len
+    j = (k - m) % ring_len
+    l = (k - i) % ring_len
+
 
     # print
     l0.config(text=ring[i])
@@ -181,7 +193,7 @@ b2 = tk.Button(window, text='down', height=1, command=twist_down)
 b2.grid(column=4, row=3)
 
 b3 = tk.Button(window, text='scramble', height=1, command=scramble)
-b3.grid(column=2, row=6, sticky=tk.W, pady=15)
+b3.grid(column=2, row=6, sticky=tk.W)
 
 b4 = tk.Button(window, text='reset', height=1, command=reset)
 b4.grid(column=2, row=7, sticky=tk.W)
