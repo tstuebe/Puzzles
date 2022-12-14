@@ -1,18 +1,18 @@
-# Import tkinter
+# A very easy tube shaped puzzle. Solvable in three moves.
+
+# Import
 from tkinter import *
 import tkinter as tk
+from random import randint
  
 # Format Window
 window = tk.Tk()
-window.title('My Window')
-window.geometry('600x150')
+window.title('Tube Puzzle')
+window.geometry('600x250')
 
 # Define Rings
-ring0 = [0, 1, 2, 3, 4, 5, 6]
-ring1 = [0, 1, 2, 3, 4, 5, 6]
-ring2 = [0, 1, 2, 3, 4, 5, 6]
-ring3 = [0, 1, 2, 3, 4, 5, 6]
-ring4 = [0, 1, 2, 3, 4, 5, 6]
+ring = [0, 1, 2, 3, 4, 5, 6]
+ring_len = len(ring)
 
 # Define Ring Indices
 i = 0
@@ -31,77 +31,135 @@ window.columnconfigure(5, weight=1)
 window.columnconfigure(6, weight=1)
 
 # Prepare Output Interface
-l0 = tk.Label(window, bg='white', width=10, text=ring0[i])
+l0 = tk.Label(window, bg='white', width=10, text=ring[i])
 l0.grid(column=1, row=1, pady=15)
 
-l1 = tk.Label(window, bg='white', width=10, text=ring1[j])
+l1 = tk.Label(window, bg='white', width=10, text=ring[j])
 l1.grid(column=2, row=1, pady=15)
 
-l2 = tk.Label(window, bg='white', width=10, text=ring2[k])
+l2 = tk.Label(window, bg='white', width=10, text=ring[k])
 l2.grid(column=3, row=1, pady=15)
 
-l3 = tk.Label(window, bg='white', width=10, text=ring3[l])
+l3 = tk.Label(window, bg='white', width=10, text=ring[l])
 l3.grid(column=4, row=1, pady=15)
 
-l4 = tk.Label(window, bg='white', width=10, text=ring4[m])
+l4 = tk.Label(window, bg='white', width=10, text=ring[m])
 l4.grid(column=5, row=1, pady=15)
 
 # Define Functions
 def twist_up():
+    # get indices
     global i
     global j
     global k
     global l
     global m
+
+    # twist first, middle, and last column clockwise
     if (var1.get() == 0):
-        i = (i + 1) % 7
-        k = (k + 1) % 7
-        m = (m + 1) % 7
-        l0.config(text=ring0[i])
-        l2.config(text=ring2[k])
-        l4.config(text=ring4[m])
+        i = (i + 1) % ring_len
+        k = (k + 1) % ring_len
+        m = (m + 1) % ring_len
+        l0.config(text=ring[i])
+        l2.config(text=ring[k])
+        l4.config(text=ring[m])
+
+    #twist first three columns clockwise
     elif (var1.get() == 1):
-        i = (i + 1) % 7
-        j = (j + 1) % 7
-        k = (k + 1) % 7
-        l0.config(text=ring0[i])
-        l1.config(text=ring1[j])
-        l2.config(text=ring2[k])
+        i = (i + 1) % ring_len
+        j = (j + 1) % ring_len
+        k = (k + 1) % ring_len
+        l0.config(text=ring[i])
+        l1.config(text=ring[j])
+        l2.config(text=ring[k])
+
+    # twist last three columns clockwise
     elif (var1.get() == 2):
-        k = (k + 1) % 7
-        l = (l + 1) % 7
-        m = (m + 1) % 7
-        l2.config(text=ring2[k])
-        l3.config(text=ring3[l])
-        l4.config(text=ring4[m])
+        k = (k + 1) % ring_len
+        l = (l + 1) % ring_len
+        m = (m + 1) % ring_len
+        l2.config(text=ring[k])
+        l3.config(text=ring[l])
+        l4.config(text=ring[m])
 
 def twist_down():
+    # get indices
     global i
     global j
     global k
     global l
     global m
+
+    # twist first, middle, and last column counter-clockwise
     if (var1.get() == 0):
-        i = (i - 1) % 7
-        k = (k - 1) % 7
-        m = (m - 1) % 7
-        l0.config(text=ring0[i])
-        l2.config(text=ring2[k])
-        l4.config(text=ring4[m])
+        i = (i - 1) % ring_len
+        k = (k - 1) % ring_len
+        m = (m - 1) % ring_len
+        l0.config(text=ring[i])
+        l2.config(text=ring[k])
+        l4.config(text=ring[m])
+
+    #twist first three columns counter-clockwise
     elif (var1.get() == 1):
-        i = (i - 1) % 7
-        j = (j - 1) % 7
-        k = (k - 1) % 7
-        l0.config(text=ring0[i])
-        l1.config(text=ring1[j])
-        l2.config(text=ring2[k])
+        i = (i - 1) % ring_len
+        j = (j - 1) % ring_len
+        k = (k - 1) % ring_len
+        l0.config(text=ring[i])
+        l1.config(text=ring[j])
+        l2.config(text=ring[k])
+        
+    # twist last three columns counter-clockwise
     elif (var1.get() == 2):
-        k = (k - 1) % 7
-        l = (l - 1) % 7
-        m = (m - 1) % 7
-        l2.config(text=ring2[k])
-        l3.config(text=ring3[l])
-        l4.config(text=ring4[m])
+        k = (k - 1) % ring_len
+        l = (l - 1) % ring_len
+        m = (m - 1) % ring_len
+        l2.config(text=ring[k])
+        l3.config(text=ring[l])
+        l4.config(text=ring[m])
+
+def reset():
+    # set indices
+    global i
+    global j
+    global k
+    global l
+    global m
+    i = 0
+    j = 0
+    k = 0
+    l = 0
+    m = 0
+
+    # print
+    l0.config(text=ring[i])
+    l1.config(text=ring[j])
+    l2.config(text=ring[k])
+    l3.config(text=ring[l])
+    l4.config(text=ring[m])
+    
+
+def scramble():
+    # get indices
+    global i
+    global j
+    global k
+    global l
+    global m
+    i = randint(0, ring_len - 1)
+    j = randint(0, ring_len - 1)
+    k = randint(0, ring_len - 1)
+    # l must be defined later
+    m = randint(0, ring_len - 1)
+
+    # set indice l
+    l = (ring_len + i + (m - k) - 1 ) % ring_len
+
+    # print
+    l0.config(text=ring[i])
+    l1.config(text=ring[j])
+    l2.config(text=ring[k])
+    l3.config(text=ring[l])
+    l4.config(text=ring[m])
  
 # Define Radio Button Variable
 var1 = tk.IntVar()
@@ -121,6 +179,12 @@ b1.grid(column=4, row=2)
 
 b2 = tk.Button(window, text='down', height=1, command=twist_down)
 b2.grid(column=4, row=3)
+
+b3 = tk.Button(window, text='scramble', height=1, command=scramble)
+b3.grid(column=2, row=6, sticky=tk.W, pady=15)
+
+b4 = tk.Button(window, text='reset', height=1, command=reset)
+b4.grid(column=2, row=7, sticky=tk.W)
 
 # Begin Loop
 window.mainloop()
