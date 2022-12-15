@@ -60,10 +60,12 @@ fg = ['black', 'white', 'white', 'white', 'white']
 
 size = len(bg)
 
+var_mode = tk.IntVar()
+
 # Initialize Chart
 for i in range(5):
     for j in range(5):
-        spot[i][j] = tk.Label(window, width=5, height=1, text= str(j + 1))
+        spot[i][j] = tk.Label(window, width=5, height=1, text= str(j + 1), borderwidth = 1, relief = 'solid')
         spot[i][j].grid(row = i + 1, column = j + 1)
         spot[i][j].config(bg = bg[i], fg = fg[i])
 
@@ -155,18 +157,32 @@ def scramble():
     print('scramble')
 
 def reset():
-    for i in range(5):
-        for j in range(5):
-            spot[i][j] = tk.Label(window, bg='white', width=5, height=1, text= str(j + 1))
-            spot[i][j].grid(row = i + 1, column = j + 1)
-            if i == 1:
-                spot[i][j].config(bg = 'red', fg = 'white')
-            elif i == 2:
-                spot[i][j].config(bg = 'green', fg = 'white')
-            elif i == 3:
-                spot[i][j].config(bg = 'blue', fg = 'white')
-            elif i == 4:
-                spot[i][j].config(bg = 'black', fg = 'white')
+    if (var_mode.get() == 1):
+        for i in range(5):
+            for j in range(5):
+                spot[i][j] = tk.Label(window, bg='white', width=5, height=1, text= str(j + 1), borderwidth = 1, relief = 'solid')
+                spot[i][j].grid(row = i + 1, column = j + 1)
+                if i == 1:
+                    spot[i][j].config(bg = 'red', fg = 'white')
+                elif i == 2:
+                    spot[i][j].config(bg = 'green', fg = 'white')
+                elif i == 3:
+                    spot[i][j].config(bg = 'blue', fg = 'white')
+                elif i == 4:
+                    spot[i][j].config(bg = 'black', fg = 'white')
+    else:
+        for i in range(5):
+            for j in range(5):
+                spot[i][j] = tk.Label(window, bg='white', width=5, height=1, text= '', borderwidth = 1, relief = 'solid')
+                spot[i][j].grid(row = i + 1, column = j + 1)
+                if i == 1:
+                    spot[i][j].config(bg = 'red', fg = 'white')
+                elif i == 2:
+                    spot[i][j].config(bg = 'green', fg = 'white')
+                elif i == 3:
+                    spot[i][j].config(bg = 'blue', fg = 'white')
+                elif i == 4:
+                    spot[i][j].config(bg = 'black', fg = 'white')
 
 # Define Controls
 upl = tk.Button(window, text = '^', command = upleft)
@@ -210,5 +226,10 @@ scramble.grid(column=4, row=7, sticky=tk.W)
 
 reset = tk.Button(window, text='reset', height=1, width = 2, command=reset)
 reset.grid(column=5, row=7, sticky=tk.W)
+
+mode = tk.Checkbutton(window, text='#\'s', variable = var_mode, onvalue = 1, offvalue = 0)
+mode.grid(column=6, row=7, sticky=tk.W)
+
+mode.select()
 
 window.mainloop()
