@@ -36,17 +36,23 @@ spot = [['l11', 'l12', 'l13', 'l14', 'l15'],
         ['l41', 'l42', 'l43', 'l44', 'l45'],
         ['l51', 'l52', 'l53', 'l54', 'l55']]
 
-current_color = [['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', ''],
-                 ['', '', '', '', '']]
+current_bg = [['', '', '', '', ''],
+              ['', '', '', '', ''],
+              ['', '', '', '', ''],
+              ['', '', '', '', ''],
+              ['', '', '', '', '']]
 
-current_text = [['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['', '', '', '', ''],
-                ['', '', '', '', '']]
+current_fg = [['', '', '', '', ''],
+              ['', '', '', '', ''],
+              ['', '', '', '', ''],
+              ['', '', '', '', ''],
+              ['', '', '', '', '']]
+
+current_tx = [['', '', '', '', ''],
+              ['', '', '', '', ''],
+              ['', '', '', '', ''],
+              ['', '', '', '', ''],
+              ['', '', '', '', '']]
 
 bg = ['white', 'red', 'green', 'blue', 'black']
 fg = ['black', 'white', 'white', 'white', 'white'] 
@@ -59,61 +65,89 @@ for i in range(5):
         spot[i][j].grid(row = i + 1, column = j + 1)
         spot[i][j].config(bg = bg[i], fg = fg[i])
 
-def upleft():
+def get_vars():
     for i in range(5):
         for j in range(5):
-            current_text[i][j] = spot[i % size][j].cget('fg')
-            current_color[i][j] = spot[i % size][j].cget('bg')
-    for i in range(5):
-        for j in range(3):
-            spot[i][j].config(bg = current_color[(i + 1) % size][j], fg = current_text[(i + 1) % size][j])
-    # print(current_color)
+            current_bg[i][j] = spot[i % size][j].cget('bg')
+            current_fg[i][j] = spot[i % size][j].cget('fg')
+            current_tx[i][j] = spot[i % size][j].cget('text')
+
+def move_up(a, b, c, d):
+    for i in range(a, b):
+        for j in range(c, d):
+            spot[i][j].config(bg = current_bg[(i + 1) % size][j], 
+                              fg = current_fg[(i + 1) % size][j],
+                              text = current_tx[(i + 1) % size][j])
+
+def move_dn(a, b, c, d):
+    for i in range(a, b):
+        for j in range(c, d):
+            spot[i][j].config(bg = current_bg[(i - 1) % size][j], 
+                              fg = current_fg[(i - 1) % size][j],
+                              text = current_tx[(i - 1) % size][j])
+
+def move_lf(a, b, c, d):
+    for i in range(a, b):
+        for j in range(c, d):
+            spot[i][j].config(bg = current_bg[i][(j + 1) % size], 
+                              fg = current_fg[i][(j + 1) % size],
+                              text = current_tx[i][(j + 1) % size])
+
+def move_rt(a, b, c, d):
+    for i in range(a, b):
+        for j in range(c, d):
+            spot[i][j].config(bg = current_bg[i][(j - 1) % size], 
+                              fg = current_fg[i][(j - 1) % size],
+                              text = current_tx[i][(j - 1) % size])
+
+def upleft():
+    get_vars()
+    move_up(0, 5, 0, 3)
 
 def upcenter():
-    for i in range(5):
-        for j in range(5):
-            current_text[i][j] = spot[i % size][j].cget('fg')
-            current_color[i][j] = spot[i % size][j].cget('bg')
-    for i in range(5):
-        for j in range(1,4):
-            spot[i][j].config(bg = current_color[(i + 1) % size][j], fg = current_text[(i + 1) % size][j])
+    get_vars()
+    move_up(0, 5, 1, 4)
 
 def upright():
-    for i in range(5):
-        for j in range(5):
-            current_color[i][j] = spot[i % size][j].cget('bg')
-            current_text[i][j] = spot[i % size][j].cget('fg')
-    for i in range(5):
-        for j in range(2,5):
-            spot[i][j].config(bg = current_color[(i + 1) % size][j], fg = current_text[(i + 1) % size][j])
+    get_vars()
+    move_up(0, 5, 2, 5)
 
 def downleft():
-    print('downleft')
+    get_vars()
+    move_dn(0, 5, 0, 3)
 
 def downcenter():
-    print('downcenter')
+    get_vars()
+    move_dn(0, 5, 1, 4)
 
 def downright():
-    print('downright')
+    get_vars()
+    move_dn(0, 5, 2, 5)
 
 def leftup():
-    print('leftup')
+    get_vars()
+    move_lf(0, 3, 0, 5)
 
 def leftcenter():
-    print('leftcenter')
+    get_vars()
+    move_lf(1, 4, 0, 5)
 
 def leftdown():
-    print('leftdown')
+    get_vars()
+    move_lf(2, 5, 0, 5)
 
 def rightup():
-    print('rightup')
+    get_vars()
+    move_rt(0, 3, 0, 5)
 
 def rightcenter():
-    print('rightcenter')
+    get_vars()
+    move_rt(1, 4, 0, 5)
 
 def rightdown():
-    print('rightdown')
-
+    get_vars()
+    move_rt(2, 5, 0, 5)
+    
 def scramble():
     print('scramble')
 
