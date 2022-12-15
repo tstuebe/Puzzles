@@ -3,7 +3,7 @@
 # Import
 from tkinter import *
 import tkinter as tk
-from random import randint
+import numpy as np
  
 # Format Window
 window = tk.Tk()
@@ -152,9 +152,15 @@ def rightcenter():
 def rightdown():
     get_vars()
     move_rt(2, 5, 0, 5)
-    
+
+move_list = [upleft, upcenter, upright, leftup, leftcenter, leftdown]
+
 def scramble():
-    print('scramble')
+    global n
+    global N
+    N = range(10)
+    for n in N:
+        np.random.choice(move_list)()
 
 def reset():
     if (var_mode.get() == 1):
