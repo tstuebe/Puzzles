@@ -1,4 +1,4 @@
-# Scroll 3 rows at a time
+# Scroll 3 rows at a time, more difficult than tube
 
 # Import
 from tkinter import *
@@ -30,6 +30,7 @@ window.rowconfigure(5, weight=1)
 window.rowconfigure(6, weight=1)
 window.rowconfigure(7, weight=1)
 
+# Define Variables
 spot = [['l11', 'l12', 'l13', 'l14', 'l15'],
         ['l21', 'l22', 'l23', 'l24', 'l25'],
         ['l31', 'l32', 'l33', 'l34', 'l35'],
@@ -59,12 +60,14 @@ fg = ['black', 'white', 'white', 'white', 'white']
 
 size = len(bg)
 
+# Initialize Chart
 for i in range(5):
     for j in range(5):
         spot[i][j] = tk.Label(window, width=5, height=1, text= str(j + 1))
         spot[i][j].grid(row = i + 1, column = j + 1)
         spot[i][j].config(bg = bg[i], fg = fg[i])
 
+# Define Functions
 def get_vars():
     for i in range(5):
         for j in range(5):
@@ -165,6 +168,7 @@ def reset():
             elif i == 4:
                 spot[i][j].config(bg = 'black', fg = 'white')
 
+# Define Controls
 upl = tk.Button(window, text = '^', command = upleft)
 upl.grid(row = 0, column = 2)
 
