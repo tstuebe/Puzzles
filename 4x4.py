@@ -1,4 +1,4 @@
-# Scroll 3 rows at a time, more difficult than tube
+# Scroll 2 rows/columns at a time
 
 # Import
 from tkinter import *
@@ -31,48 +31,44 @@ window.rowconfigure(6, weight=1)
 window.rowconfigure(7, weight=1)
 
 # Define Variables
-spot = [['l11', 'l12', 'l13', 'l14', 'l15'],
-        ['l21', 'l22', 'l23', 'l24', 'l25'],
-        ['l31', 'l32', 'l33', 'l34', 'l35'],
-        ['l41', 'l42', 'l43', 'l44', 'l45'],
-        ['l51', 'l52', 'l53', 'l54', 'l55']]
+spot = [['l11', 'l12', 'l13', 'l14'],
+        ['l21', 'l22', 'l23', 'l24'],
+        ['l31', 'l32', 'l33', 'l34'],
+        ['l41', 'l42', 'l43', 'l44']]
 
-current_bg = [['', '', '', '', ''],
-              ['', '', '', '', ''],
-              ['', '', '', '', ''],
-              ['', '', '', '', ''],
-              ['', '', '', '', '']]
+current_bg = [['', '', '', ''],
+              ['', '', '', ''],
+              ['', '', '', ''],
+              ['', '', '', '']]
 
-current_fg = [['', '', '', '', ''],
-              ['', '', '', '', ''],
-              ['', '', '', '', ''],
-              ['', '', '', '', ''],
-              ['', '', '', '', '']]
+current_fg = [['', '', '', ''],
+              ['', '', '', ''],
+              ['', '', '', ''],
+              ['', '', '', '']]
 
-current_tx = [['', '', '', '', ''],
-              ['', '', '', '', ''],
-              ['', '', '', '', ''],
-              ['', '', '', '', ''],
-              ['', '', '', '', '']]
+current_tx = [['', '', '', ''],
+              ['', '', '', ''],
+              ['', '', '', ''],
+              ['', '', '', '']]
 
-bg = ['white', 'red', 'green', 'blue', 'black']
-fg = ['black', 'white', 'white', 'white', 'white'] 
+bg = ['white', 'red', 'green', 'black']
+fg = ['black', 'white', 'white', 'white'] 
 
 size = len(bg)
 
 var_mode = tk.IntVar()
 
 # Initialize Chart
-for i in range(5):
-    for j in range(5):
+for i in range(4):
+    for j in range(4):
         spot[i][j] = tk.Label(window, width=5, height=1, text= str(i + 1) + str(j + 1), borderwidth = 1, relief = 'solid')
         spot[i][j].grid(row = i + 1, column = j + 1)
         spot[i][j].config(bg = bg[i], fg = fg[i])
 
 # Define Functions
 def get_vars():
-    for i in range(5):
-        for j in range(5):
+    for i in range(4):
+        for j in range(4):
             current_bg[i][j] = spot[i % size][j].cget('bg')
             current_fg[i][j] = spot[i % size][j].cget('fg')
             current_tx[i][j] = spot[i % size][j].cget('text')
@@ -107,51 +103,51 @@ def move_rt(a, b, c, d):
 
 def upleft():
     get_vars()
-    move_up(0, 5, 0, 3)
+    move_up(0, 4, 0, 2)
 
 def upcenter():
     get_vars()
-    move_up(0, 5, 1, 4)
+    move_up(0, 4, 1, 3)
 
 def upright():
     get_vars()
-    move_up(0, 5, 2, 5)
+    move_up(0, 4, 2, 4)
 
 def downleft():
     get_vars()
-    move_dn(0, 5, 0, 3)
+    move_dn(0, 4, 0, 2)
 
 def downcenter():
     get_vars()
-    move_dn(0, 5, 1, 4)
+    move_dn(0, 4, 1, 3)
 
 def downright():
     get_vars()
-    move_dn(0, 5, 2, 5)
+    move_dn(0, 4, 2, 4)
 
 def leftup():
     get_vars()
-    move_lf(0, 3, 0, 5)
+    move_lf(0, 2, 0, 4)
 
 def leftcenter():
     get_vars()
-    move_lf(1, 4, 0, 5)
+    move_lf(1, 3, 0, 4)
 
 def leftdown():
     get_vars()
-    move_lf(2, 5, 0, 5)
+    move_lf(2, 4, 0, 4)
 
 def rightup():
     get_vars()
-    move_rt(0, 3, 0, 5)
+    move_rt(0, 2, 0, 4)
 
 def rightcenter():
     get_vars()
-    move_rt(1, 4, 0, 5)
+    move_rt(1, 3, 0, 4)
 
 def rightdown():
     get_vars()
-    move_rt(2, 5, 0, 5)
+    move_rt(2, 4, 0, 4)
 
 move_list = [upleft, upcenter, upright, leftup, leftcenter, leftdown]
 
@@ -164,8 +160,8 @@ def scramble():
 
 def reset():
     if (var_mode.get() == 1):
-        for i in range(5):
-            for j in range(5):
+        for i in range(4):
+            for j in range(4):
                 spot[i][j] = tk.Label(window, bg='white', width=5, height=1, text= str(i + 1) + str(j + 1), borderwidth = 1, relief = 'solid')
                 spot[i][j].grid(row = i + 1, column = j + 1)
                 if i == 1:
@@ -177,8 +173,8 @@ def reset():
                 elif i == 4:
                     spot[i][j].config(bg = 'black', fg = 'white')
     else:
-        for i in range(5):
-            for j in range(5):
+        for i in range(4):
+            for j in range(4):
                 spot[i][j] = tk.Label(window, bg='white', width=5, height=1, text= '', borderwidth = 1, relief = 'solid')
                 spot[i][j].grid(row = i + 1, column = j + 1)
                 if i == 1:
