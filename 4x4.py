@@ -197,13 +197,13 @@ upr = tk.Button(window, text = '^', command = upright)
 upr.grid(row = 0, column = 4)
 
 downl = tk.Button(window, text = 'v', command = downleft)
-downl.grid(row = 6, column = 2)
+downl.grid(row = 5, column = 2)
 
 downc = tk.Button(window, text = 'v', command = downcenter)
-downc.grid(row = 6, column = 3)
+downc.grid(row = 5, column = 3)
 
 downr = tk.Button(window, text = 'v', command = downright)
-downr.grid(row = 6, column = 4)
+downr.grid(row = 5, column = 4)
 
 leftu = tk.Button(window, text = '<', command = leftup)
 leftu.grid(row = 2, column = 0)
@@ -215,22 +215,22 @@ leftd = tk.Button(window, text = '<', command = leftdown)
 leftd.grid(row = 4, column = 0)
 
 rightu = tk.Button(window, text = '>', command = rightup)
-rightu.grid(row = 2, column = 6)
+rightu.grid(row = 2, column = 5)
 
 rightc = tk.Button(window, text = '>', command = rightcenter)
-rightc.grid(row = 3, column = 6)
+rightc.grid(row = 3, column = 5)
 
 rightd = tk.Button(window, text = '>', command = rightdown)
-rightd.grid(row = 4, column = 6)
+rightd.grid(row = 4, column = 5)
 
 scramble = tk.Button(window, text='mix', width = 2, height=1, command=scramble)
-scramble.grid(column=4, row=7, sticky=tk.W)
+scramble.grid(column=3, row=6, sticky=tk.W)
 
 reset = tk.Button(window, text='reset', height=1, width = 2, command=reset)
-reset.grid(column=5, row=7, sticky=tk.W)
+reset.grid(column=4, row=6, sticky=tk.W)
 
 mode = tk.Checkbutton(window, text='#\'s', variable = var_mode, onvalue = 1, offvalue = 0)
-mode.grid(column=6, row=7, sticky=tk.W)
+mode.grid(column=5, row=6, sticky=tk.W)
 
 mode.select()
 
